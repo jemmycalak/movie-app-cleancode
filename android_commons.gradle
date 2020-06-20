@@ -1,0 +1,40 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion Versions.compileSdk
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Release.versionCode
+        versionName Release.versionName
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    androidExtensions {
+        experimental = true
+    }
+
+}
+
+dependencies {
+    implementation KotlinLibraries.kotlin
+}
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}

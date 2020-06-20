@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/listMovie">
+
+    <fragment
+        android:id="@+id/listMovie"
+        android:name="com.jemmycalak.movie.fragment.ListMovieFragment">
+        <action
+            android:id="@+id/listMovie_to_detailMovie"
+            app:destination="@id/detailMovie">
+            <argument
+                android:name="model"
+                app:argType="com.jemmycalak.model.Result"/>
+        </action>
+        <action
+            android:id="@+id/listMovie_to_listFavoritMovie"
+            app:destination="@id/favoritMovie"/>
+    </fragment>
+    <fragment
+        android:id="@+id/detailMovie"
+        android:name="com.jemmycalak.movie.fragment.DetailMovieFragment">
+        <argument
+            android:name="model"
+            app:argType="com.jemmycalak.model.Result"/>
+    </fragment>
+    <fragment
+        android:id="@+id/favoritMovie"
+        android:name="com.jemmycalak.favoritmovie.fragment.ListFavoritMovieFragment">
+        <action
+            android:id="@+id/listMovie_to_detailMovie"
+            app:destination="@id/detailMovie">
+            <argument
+                android:name="model"
+                app:argType="com.jemmycalak.model.Result"/>
+        </action>
+    </fragment>
+
+</navigation>

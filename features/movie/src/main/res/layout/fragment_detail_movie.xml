@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.jemmycalak.movie.viewmodel.DetailMovieViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.DetailMovieFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titleTextColor="@android:color/white" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBar">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardUseCompatPadding="true">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/padding_10">
+
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="@dimen/image_150"
+                            android:layout_height="@dimen/image_200"
+                            android:scaleType="fitXY"
+                            app:imageUrl="@{viewModel.model.posterPath}"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageLove"
+                            android:layout_width="@dimen/image_32"
+                            android:layout_height="@dimen/image_32"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:onFavorit="@{viewModel.model.isFavorit}"
+                            android:onClick="@{()-> viewModel.onFavorit(viewModel.model.isFavorit)}"
+                            app:tagFavorit="@{null}"/>
+
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/padding_4"
+                            android:paddingLeft="@dimen/padding_4"
+                            android:paddingRight="@dimen/padding_4"
+                            android:text="@{viewModel.model.title}"
+                            android:textSize="@dimen/text_16"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintRight_toLeftOf="@+id/imageLove"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/dateRelease"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/padding_4"
+                            android:paddingLeft="@dimen/padding_4"
+                            android:textSize="@dimen/text_12"
+                            android:textStyle="bold"
+                            app:dateRelease="@{viewModel.model.releaseDate}"
+                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+                        <TextView
+                            android:id="@+id/overView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/padding_8"
+                            android:paddingLeft="@dimen/padding_4"
+                            android:text="@string/label_overview"
+                            android:textSize="@dimen/text_14"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/dateRelease" />
+
+                        <TextView
+                            android:id="@+id/smallDesc"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/padding_4"
+                            android:paddingLeft="@dimen/padding_4"
+                            android:text="@{viewModel.model.overview}"
+                            android:textSize="@dimen/text_12"
+                            android:textStyle="normal"
+                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/overView" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:text="@string/label_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_14"
+                    android:paddingLeft="@dimen/padding_8"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:dataReview="@{viewModel.listReviewMovieData.data.results}"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

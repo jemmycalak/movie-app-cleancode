@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+android {
+
+    defaultConfig {
+        buildConfigField 'String', 'BASE_URL', '"https://api.themoviedb.org/3/"'
+        buildConfigField 'String', 'API_KEY', '"96c2386d15f5911b04e6c6651df60c0d"'
+    }
+
+}
+
+dependencies {
+    // KOTLIN
+    implementation KotlinLibraries.kotlin
+    // NETWORK
+    implementation Libraries.gson
+    implementation Libraries.retrofit
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.httpLoggingInterceptor
+    // DATA MODULE
+    implementation project(Modules.model)
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+}

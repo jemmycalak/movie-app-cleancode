@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+android {
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation project(Modules.common)
+    // KOTLIN
+    implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.kotlinCoroutineCore
+    implementation AndroidLibraries.kotlinCoroutineAndroid
+    // ANDROID
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.core
+    implementation AndroidLibraries.coreKtx
+    implementation AndroidLibraries.activity
+    implementation AndroidLibraries.activityKtx
+    implementation AndroidLibraries.fragment
+    implementation AndroidLibraries.fragmentKtx
+    api AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation Libraries.glide
+    implementation Libraries.shimmer
+    kapt Libraries.glideProcessor
+    implementation AndroidLibraries.androidSupport
+
+}

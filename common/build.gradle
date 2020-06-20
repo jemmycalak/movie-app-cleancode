@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply from: '../android_commons.gradle'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    dataBinding {
+        enabled true
+    }
+
+    defaultConfig {
+        buildConfigField 'String', 'BASE_URL_IMAGE', '"https://image.tmdb.org/t/p/w500/"'
+    }
+}
+
+dependencies {
+    api project(Modules.local)
+    api project(Modules.repository)
+    api project(Modules.navigation)
+
+    api Libraries.koin
+    api Libraries.koinCore
+    api Libraries.koinViewModel
+
+    api AndroidLibraries.lifecycleViewModel
+    api AndroidLibraries.lifecycleExtensions
+
+    implementation Libraries.glide
+    kapt Libraries.glideProcessor
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation AndroidLibraries.matrialDesign
+    api AndroidLibraries.constraintLayout
+
+}

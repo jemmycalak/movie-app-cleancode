@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jemmycalak.movie.viewmodel.ListMovieViewModel" />
+
+        <variable
+            name="callBack"
+            type="com.jemmycalak.movie.fragment.Callback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.ListMovieFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/app_name"
+                app:titleTextColor="@android:color/white"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btCategory"
+            app:layout_constraintTop_toBottomOf="@+id/appBar"
+            android:paddingTop="@dimen/padding_10"
+            android:paddingBottom="@dimen/padding_10"
+            tools:listitem="@layout/item_movie"
+            app:dataMovie="@{viewModel.listMovieData.data.results}" />
+
+        <TextView
+            android:id="@+id/btCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_14"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="@dimen/padding_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/label_category"
+            android:gravity="center"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:onClick="@{(v)->callBack.onCategory()}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

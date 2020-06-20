@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    implementation KotlinLibraries.kotlin
+    implementation Libraries.gson
+    implementation Libraries.roomRunTime
+}

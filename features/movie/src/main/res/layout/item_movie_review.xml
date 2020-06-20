@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="model"
+            type="com.jemmycalak.model.ResultReview" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_4"
+        android:paddingRight="@dimen/padding_4"
+        android:paddingTop="@dimen/padding_4">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_account_circle_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+            android:id="@+id/name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/image"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{model.author}"/>
+        <TextView
+            android:id="@+id/content"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintLeft_toRightOf="@+id/image"
+            android:layout_width="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="@dimen/text_12"
+            android:text="@{model.content}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

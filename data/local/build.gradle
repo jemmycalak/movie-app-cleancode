@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'DB_NAME', Database.DB_NAME
+        buildConfigField 'int', 'DB_VERSION', Database.DB_VERSION
+    }
+}
+
+dependencies {
+    // ROOM
+    implementation Libraries.roomRunTime
+    implementation Libraries.roomKtx
+    implementation AndroidLibraries.lifecycleExtensions
+    kapt Libraries.roomCompiler
+    // DATA MODULE
+    implementation project(Modules.model)
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+}
