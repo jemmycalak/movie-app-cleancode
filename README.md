@@ -1,8 +1,8 @@
 # Movie-Apps
 
 ## Screenshoots
-<img src="screenshoots/app_main.png" height="400" alt="Screenshot"/> <img src="screenshoots/app_detail.png" height="400" alt="Screenshot"/> 
-<img src="screenshoots/app_category.png" height="400" alt="Screenshot"/> <img src="screenshoots/app_favorit_list.png" height="400" alt="Screenshot"/> 
+<img src="screenshoots/app_main.jpeg" height="400" alt="Screenshot"/> <img src="screenshoots/app_detail.jpeg" height="400" alt="Screenshot"/> 
+<img src="screenshoots/app_category.jpeg" height="400" alt="Screenshot"/> <img src="screenshoots/app_favorit_list.jpeg" height="400" alt="Screenshot"/> 
 
 ## Structure & Concept
 - MVVM + Data binding
