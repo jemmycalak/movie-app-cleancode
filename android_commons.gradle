@@ -29,6 +29,8 @@ android {
 
 dependencies {
     implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.kotlinCoroutineCore
+    implementation AndroidLibraries.kotlinCoroutineAndroid
 }
 
 tasks.withType(Test) {

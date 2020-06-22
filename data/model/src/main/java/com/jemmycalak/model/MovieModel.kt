@@ -52,5 +52,5 @@ data class Result(
     var voteCount: Int?
 ):Parcelable{
     var isFavorit:Boolean=false
-    var filter:Int=0
+    var filter:Int?=0
 }

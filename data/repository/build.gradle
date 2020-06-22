@@ -17,4 +17,11 @@ dependencies {
     // RETROFIT
     implementation Libraries.retrofit
     implementation Libraries.gson
+    // TESTS
+    testImplementation TestLibraries.json
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.mockk
+    testImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.coroutine
+    testImplementation project(Modules.commonTest)
 }

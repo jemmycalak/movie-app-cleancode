@@ -38,8 +38,19 @@ object Versions{
     const val glide = "4.9.0"
     const val glideProcessor = "4.8.0"
     const val room = "2.1.0"
-}
+    const val recyclerview = "1.0.0"
 
+    val junit = "4.12"
+    val androidTestRunner = "1.1.2-alpha02"
+    val espressoCore = "3.2.0-alpha02"
+    val mockwebserver = "2.7.5"
+    val archCoreTest = "2.0.0"
+    val androidJunit = "1.1.0"
+    val mockk = "1.9.2"
+    val fragmentTest = "1.1.0-alpha06"
+    val databinding = "3.3.2"
+    const val json = "20190722"
+}
 
 object Libraries {
     // KOIN
@@ -69,11 +80,10 @@ object AndroidLibraries {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.core}"
     const val core = "androidx.core:core:${Versions.core}"
-    const val constraintLayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    const val lifecycleViewModel =
-        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     const val activity = "androidx.activity:activity:${Versions.activity}"
     const val activityKtx = "androidx.activity:activity-ktx:${Versions.activity}"
     const val fragment = "androidx.fragment:fragment:${Versions.fragment}"
@@ -83,6 +93,29 @@ object AndroidLibraries {
     const val matrialDesign ="com.google.android.material:material:${Versions.material}"
     const val androidSupport = "androidx.legacy:legacy-support-v4:1.0.0"
 
+}
+
+object TestLibraries {
+
+    val androidTestRunner = "androidx.test:runner:${Versions.androidTestRunner}"
+    val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espressoCore}"
+    val archCoreTest = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
+    val junit = "androidx.test.ext:junit:${Versions.androidJunit}"
+    val fragmentNav = "androidx.fragment:fragment-testing:${Versions.fragmentTest}"
+
+    const val json = "org.json:json:${Versions.json}"
+    // KOIN
+    val koin = "org.koin:koin-test:${Versions.koin}"
+    // MOCK WEBSERVER
+    val mockWebServer = "com.squareup.okhttp:mockwebserver:${Versions.mockwebserver}"
+    // MOCK
+    val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
+    val mockk = "io.mockk:mockk:${Versions.mockk}"
+    // COROUTINE
+    val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+    // DATA BINDING
+    val databinding = "androidx.databinding:databinding-compiler:${Versions.databinding}"
 }
 
 
@@ -95,6 +128,7 @@ object KotlinLibraries {
 object Modules {
     const val navigation = ":navigation"
     const val common = ":common"
+    const val commonTest = ":common_test"
     const val model = ":data:model"
     const val local = ":data:local"
     const val remote = ":data:remote"

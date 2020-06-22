@@ -62,8 +62,6 @@ class ListMovieFragment : BaseFragment(), Callback, CategoryMovieFragment.onCall
     }
 
     override fun onShorting(key: Int) {
-        vModel.filter.value = key
-        vModel.page.value = 1
-        vModel.getListMovie()
+        vModel.getListMovie(key, 1, true)
     }
 }

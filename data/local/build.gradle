@@ -21,5 +21,11 @@ dependencies {
     // KOIN
     implementation Libraries.koin
     implementation Libraries.koinViewModel
-    kapt "android.arch.persistence.room:compiler:1.1.1"
+    // TEST MODULE
+    androidTestImplementation project(Modules.commonTest)
+    // TEST
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.koin
+    androidTestImplementation TestLibraries.archCoreTest
 }

@@ -19,14 +19,6 @@ import kotlinx.coroutines.withContext
 class ListMovieViewModel(private val service:MovieService,
                          private val dispatchers:AppDispatchers) : BaseViewModel(){
 
-    init {
-        getListMovie()
-    }
-
-    val filter = MutableLiveData(0)
-    val page = MutableLiveData(1)
-    val shouldFetch = MutableLiveData(true)
-
     val searchLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     val _listMovie = MediatorLiveData<Resource<MovieModel>>()
@@ -34,10 +26,16 @@ class ListMovieViewModel(private val service:MovieService,
     val listMovieData: LiveData<Resource<MovieModel>> get() = _listMovie
     val loaderListMovie: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getListMovie() {
+    init {
+        getListMovie(0, 1, true)
+    }
+
+    fun getListMovie(filter:Int, page:Int, shouldFetch:Boolean) {
         viewModelScope.launch(dispatchers.main) {
             _listMovie.removeSource(listMovieResource)
-            withContext(dispatchers.io) { listMovieResource = service.getListMovie(filter.value!!, page.value!!, shouldFetch.value!!) }
+            withContext(dispatchers.io) {
+                listMovieResource = service(filter, page, shouldFetch)
+            }
             _listMovie.addSource(listMovieResource) {
                 _listMovie.postValue(it)
                 loaderListMovie.value = (it.status == Resource.Status.LOADING)

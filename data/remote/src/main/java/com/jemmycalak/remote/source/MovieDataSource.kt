@@ -30,7 +30,7 @@ class MovieDataSource(val api:MovieAPI) {
         }
     }
 
-    suspend fun getListReviewMovie(idMovie:String):Response<ReviewMovie>{
+    suspend fun getListReviewMovie(idMovie:String?):Response<ReviewMovie>{
         val query = HashMap<String, Any>()
         query[API_KEY] = BuildConfig.API_KEY
         return api.getReviewMovie(idMovie, query)

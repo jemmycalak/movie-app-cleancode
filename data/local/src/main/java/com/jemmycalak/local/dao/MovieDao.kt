@@ -18,7 +18,7 @@ interface MovieDao {
     suspend fun getMovie(): MovieTable?
 
     @Query("SELECT * FROM result WHERE filter =:filter")
-    suspend fun getResultMovie(filter:Int):List<Result>?
+    suspend fun getResultMovie(filter:Int?):List<Result>?
 
     @Query("DELETE FROM movietable")
     fun removeMovieTable()

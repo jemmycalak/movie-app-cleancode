@@ -15,7 +15,7 @@ interface MovieAPI {
                              @QueryMap query:HashMap<String, Any>):Response<MovieModel>
 
     @GET("movie/{idmovie}/reviews")
-    suspend fun getReviewMovie(@Path("idmovie") id:String,
+    suspend fun getReviewMovie(@Path("idmovie") id:String?,
                                @QueryMap query: HashMap<String, Any>):Response<ReviewMovie>
 
 }
