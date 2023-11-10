@@ -12,6 +12,8 @@
         <variable
             name="callBack"
             type="com.jemmycalak.movie.fragment.Callback" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/app_name"
-                app:titleTextColor="@android:color/white"/>
+                app:titleTextColor="@android:color/white" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -38,28 +40,37 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
+            android:paddingTop="@dimen/padding_10"
+            android:paddingBottom="@dimen/padding_10"
+            app:dataMovie="@{viewModel.listMovieData.data.results}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/btCategory"
             app:layout_constraintTop_toBottomOf="@+id/appBar"
-            android:paddingTop="@dimen/padding_10"
-            android:paddingBottom="@dimen/padding_10"
-            tools:listitem="@layout/item_movie"
-            app:dataMovie="@{viewModel.listMovieData.data.results}" />
+            tools:listitem="@layout/item_movie" />
 
         <TextView
             android:id="@+id/btCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/padding_14"
             android:background="@color/colorPrimary"
-            android:paddingBottom="@dimen/padding_14"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/label_category"
             android:gravity="center"
+            android:onClick="@{(v)->callBack.onCategory()}"
+            android:paddingTop="@dimen/padding_14"
+            android:paddingBottom="@dimen/padding_14"
+            android:text="@string/label_category"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/text_18"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:onClick="@{(v)->callBack.onCategory()}"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="@{viewModel.loaderListMovie &amp;&amp; viewModel.listMovieData == null ? View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

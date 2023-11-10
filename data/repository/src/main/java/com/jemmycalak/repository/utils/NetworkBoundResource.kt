@@ -31,10 +31,10 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val gson: G
                     when (e) {
                         is NetworkErrorException, is UnknownHostException -> {
                             setValue(Resource.error(
-                                ErrorResponse(message = "Your connection is lose"), loadFromDb()))
+                                ErrorResponse(message = "Your connection is lose"), dbResult))
                         }
                         else -> setValue(Resource.error(
-                            ErrorResponse(message = if (BuildConfig.DEBUG) e.localizedMessage else "Something wrong to server"), loadFromDb()))
+                            ErrorResponse(message = if (BuildConfig.DEBUG) e.localizedMessage else "Something wrong to server"), dbResult))
                     }
                 }
             } else {
@@ -51,10 +51,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val gson: G
         createCallAsync().apply {
             if (isSuccessful) {
                 body()?.let { saveCallResults(processResponse(it)) }
-                setValue(Resource.success(
-                    if(loadFromDb()==null)body()?.let { processResponse(it) }
-                    else loadFromDb()
-                ))
+                setValue(Resource.success(body()?.let { processResponse(it) }))
             } else {
                 setValue(Resource.error(this.getErrorResponse(gson),
                 if(loadFromDb()!=null) loadFromDb() else null))

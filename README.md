@@ -5,6 +5,7 @@
 <img src="screenshoots/app_category.jpeg" height="400" alt="Screenshot"/> <img src="screenshoots/app_favorit_list.jpeg" height="400" alt="Screenshot"/> 
 
 ## Structure & Concept
+- JDK 1.8
 - MVVM + Data binding
 - Multi-modules
 - Navigation Component
