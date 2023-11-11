@@ -1,8 +1,9 @@
 # Movie-Apps
 
 ## Screenshoots
-<img src="screenshoots/app_main.jpeg" height="400" alt="Screenshot"/> <img src="screenshoots/app_detail.jpeg" height="400" alt="Screenshot"/> 
-<img src="screenshoots/app_category.jpeg" height="400" alt="Screenshot"/> <img src="screenshoots/app_favorit_list.jpeg" height="400" alt="Screenshot"/> 
+<img src="screenshoots/app_main.jpeg" height="400" alt="Screenshot"/> <img src="screenshoots/app_detail_1.jpeg" height="400" alt="Screenshot"/> 
+<img src="screenshoots/app_detail_2.jpeg" height="400" alt="Screenshot"/><img src="screenshoots/app_category.jpeg" height="400" alt="Screenshot"/>
+<img src="screenshoots/app_favorit_list.jpeg" height="400" alt="Screenshot"/> 
 
 ## Structure & Concept
 - JDK 1.8
@@ -11,6 +12,7 @@
 - Navigation Component
 - ViewModel
 - LiveData
+- Room
 - Coroutines
 - Koin
 - Mockk
