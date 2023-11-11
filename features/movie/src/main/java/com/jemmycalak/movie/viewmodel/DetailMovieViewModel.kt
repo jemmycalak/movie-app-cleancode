@@ -9,6 +9,7 @@ import com.jemmycalak.common.utils.ErrorHandler
 import com.jemmycalak.common.utils.Event
 import com.jemmycalak.model.Result
 import com.jemmycalak.model.ReviewMovie
+import com.jemmycalak.model.VideoMovie
 import com.jemmycalak.movie.service.MovieService
 import com.jemmycalak.repository.utils.AppDispatchers
 import com.jemmycalak.repository.utils.Resource
@@ -23,17 +24,20 @@ class DetailMovieViewModel(
     lateinit var model :LiveData<Result>
 
     fun getModel(resultId:Int?) {
-        model = service.getResult(resultId)
-        getReviewMovie(resultId.toString())
+        resultId?.let {
+            model = service.getResult(resultId)
+            getReviewMovie(resultId.toString())
+            getTrailerMovie(resultId)
+        }
     }
 
     fun onFavorit(isFavorite:Boolean) {
         service.updaResulte(!isFavorite, model.value?.id)
     }
 
-    val _listReviewMovie = MediatorLiveData<Resource<ReviewMovie>>()
-    var listReviewMovieResource: LiveData<Resource<ReviewMovie>> = MutableLiveData()
+    private val _listReviewMovie = MediatorLiveData<Resource<ReviewMovie>>()
     val listReviewMovieData: LiveData<Resource<ReviewMovie>> get() = _listReviewMovie
+    private var listReviewMovieResource: LiveData<Resource<ReviewMovie>> = MutableLiveData()
     val loaderListMovie: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getReviewMovie(idMovie:String){
@@ -45,6 +49,28 @@ class DetailMovieViewModel(
                 loaderListMovie.value = (it.status == Resource.Status.LOADING)
                 when (it.status) {
                     Resource.Status.SUCCESS -> _listReviewMovie.postValue(it)
+                    Resource.Status.ERROR -> _errorHandler.postValue(Event(ErrorHandler(ErrorHandler.ErrorType.LAYOUT, it.error)))
+                }
+            }
+        }
+    }
+
+
+    private var trailerMovieResource: LiveData<Resource<VideoMovie>> = MutableLiveData()
+    private val _trailerMovie = MediatorLiveData<Resource<VideoMovie>>()
+    val trailerMovieData: LiveData<Resource<VideoMovie>> get() = _trailerMovie
+    private fun getTrailerMovie(movieId: Int) {
+        viewModelScope.launch(dispatchers.main) {
+            _trailerMovie.removeSource(trailerMovieResource)
+            withContext(dispatchers.io) {
+                trailerMovieResource = service.getMovieTrailer(movieId)
+            }
+            _trailerMovie.addSource(trailerMovieResource) {
+                _trailerMovie.postValue(it)
+                when (it.status) {
+                    Resource.Status.SUCCESS -> {
+                        _trailerMovie.postValue(it)
+                    }
                     Resource.Status.ERROR -> _errorHandler.postValue(Event(ErrorHandler(ErrorHandler.ErrorType.LAYOUT, it.error)))
                 }
             }

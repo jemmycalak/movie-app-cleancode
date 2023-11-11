@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.jemmycalak.movie.viewmodel.DetailMovieViewModel" />
@@ -33,10 +35,40 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBar">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_300">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        app:imageUrl="@{viewModel.model.posterPath}" />
+
+                    <ImageView
+                        android:id="@+id/btnPlay"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_play_video"
+                        android:visibility="@{viewModel.trailerMovieData.data != null ? View.VISIBLE:View.GONE}"
+                        app:layout_constraintBottom_toBottomOf="@id/image"
+                        app:layout_constraintEnd_toEndOf="@id/image"
+                        app:layout_constraintStart_toStartOf="@id/image"
+                        app:layout_constraintTop_toTopOf="@id/image" />
+
+                    <WebView
+                        android:id="@+id/webview"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -49,23 +81,14 @@
                         android:padding="@dimen/padding_10">
 
                         <ImageView
-                            android:id="@+id/image"
-                            android:layout_width="@dimen/image_150"
-                            android:layout_height="@dimen/image_200"
-                            android:scaleType="fitXY"
-                            app:imageUrl="@{viewModel.model.posterPath}"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
                             android:id="@+id/imageLove"
                             android:layout_width="@dimen/image_32"
                             android:layout_height="@dimen/image_32"
+                            android:onClick="@{()-> viewModel.onFavorit(viewModel.model.isFavorit)}"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:onFavorit="@{viewModel.model.isFavorit}"
-                            android:onClick="@{()-> viewModel.onFavorit(viewModel.model.isFavorit)}"
-                            app:tagFavorit="@{null}"/>
+                            app:tagFavorit="@{null}" />
 
                         <TextView
                             android:id="@+id/title"
@@ -77,7 +100,7 @@
                             android:text="@{viewModel.model.title}"
                             android:textSize="@dimen/text_16"
                             android:textStyle="bold"
-                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/imageLove"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +113,7 @@
                             android:textSize="@dimen/text_12"
                             android:textStyle="bold"
                             app:dateRelease="@{viewModel.model.releaseDate}"
-                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -103,7 +126,7 @@
                             android:text="@string/label_overview"
                             android:textSize="@dimen/text_14"
                             android:textStyle="bold"
-                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/dateRelease" />
 
@@ -116,24 +139,25 @@
                             android:text="@{viewModel.model.overview}"
                             android:textSize="@dimen/text_12"
                             android:textStyle="normal"
-                            app:layout_constraintLeft_toRightOf="@id/image"
+                            app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/overView" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:text="@string/label_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_14"
-                    android:paddingLeft="@dimen/padding_8"/>
+                    android:paddingLeft="@dimen/padding_8"
+                    android:text="@string/label_review"
+                    android:textSize="@dimen/text_14" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewReview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:dataReview="@{viewModel.listReviewMovieData.data.results}"/>
+                    app:dataReview="@{viewModel.listReviewMovieData.data.results}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

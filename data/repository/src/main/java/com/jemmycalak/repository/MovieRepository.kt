@@ -7,6 +7,7 @@ import com.jemmycalak.local.db.MovieTable
 import com.jemmycalak.model.MovieModel
 import com.jemmycalak.model.Result
 import com.jemmycalak.model.ReviewMovie
+import com.jemmycalak.model.VideoMovie
 import com.jemmycalak.remote.source.MovieDataSource
 import com.jemmycalak.repository.utils.NetworkBoundResource
 import com.jemmycalak.repository.utils.Resource
@@ -26,6 +27,7 @@ interface MovieRepositoryInterface {
     fun getResult(id: Int?): LiveData<Result>
     fun updateFavorite(result: Boolean?, id: Int?)
     fun getListFavorite(): LiveData<List<Result>>
+    suspend fun getMovieTrailer(movieId:Int): LiveData<Resource<VideoMovie>>
 }
 
 class MovieRepository(
@@ -116,4 +118,18 @@ class MovieRepository(
     override fun updateFavorite(result: Boolean?, id: Int?) = dao.updateFavorite(result, id)
 
     override fun getListFavorite(): LiveData<List<Result>> = dao.getListFavorite(true)
+    override suspend fun getMovieTrailer(movieId: Int): LiveData<Resource<VideoMovie>> {
+        return object : NetworkBoundResource<VideoMovie, VideoMovie>(gson) {
+            override fun processResponse(response: VideoMovie): VideoMovie = response
+
+            override suspend fun saveCallResults(data: VideoMovie) {}
+
+            override fun shouldFetch(data: VideoMovie?): Boolean = true
+
+            override suspend fun loadFromDb(): VideoMovie? = null
+
+            override suspend fun createCallAsync(): Response<VideoMovie> =
+                source.getMovieTrailer(movieId)
+        }.build().asLiveData()
+    }
 }

@@ -3,6 +3,7 @@ package com.jemmycalak.movie.service
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.jemmycalak.model.MovieModel
+import com.jemmycalak.model.VideoMovie
 import com.jemmycalak.repository.MovieRepositoryInterface
 import com.jemmycalak.repository.utils.Resource
 
@@ -18,4 +19,6 @@ class MovieService(private val repository: MovieRepositoryInterface) {
     fun getResult(id:Int?) = repository.getResult(id)
 
     fun updaResulte(result:Boolean?, id: Int?) = repository.updateFavorite(result,id)
+
+    suspend fun getMovieTrailer(movieId:Int) = Transformations.map(repository.getMovieTrailer(movieId)) {it}
 }

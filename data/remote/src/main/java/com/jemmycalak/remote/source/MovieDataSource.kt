@@ -2,6 +2,7 @@ package com.jemmycalak.remote.source
 
 import com.jemmycalak.model.MovieModel
 import com.jemmycalak.model.ReviewMovie
+import com.jemmycalak.model.VideoMovie
 import com.jemmycalak.remote.BuildConfig
 import com.jemmycalak.remote.api.MovieAPI
 import com.jemmycalak.remote.utils.Constans.API_KEY
@@ -34,5 +35,11 @@ class MovieDataSource(val api:MovieAPI) {
         val query = HashMap<String, Any>()
         query[API_KEY] = BuildConfig.API_KEY
         return api.getReviewMovie(idMovie, query)
+    }
+
+    suspend fun getMovieTrailer(movieId:Int): Response<VideoMovie> {
+        val query = HashMap<String, Any>()
+        query[API_KEY] = BuildConfig.API_KEY
+        return api.getMovieTrailerById(movieId, query)
     }
 }

@@ -54,7 +54,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val gson: G
                 setValue(Resource.success(body()?.let { processResponse(it) }))
             } else {
                 setValue(Resource.error(this.getErrorResponse(gson),
-                if(loadFromDb()!=null) loadFromDb() else null))
+                if(loadFromDb()!=null) dbResult else null))
             }
         }
     }
